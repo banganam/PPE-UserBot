@@ -42,8 +42,8 @@ from telethon.tl.types import DocumentAttributeAudio
 from userbot.modules.upload_download import progress, humanbytes, time_formatter
 
 CARBONLANG = "auto"
-TTS_LANG = "id"
-TRT_LANG = "id"
+TTS_LANG = "en"
+TRT_LANG = "en"
 
 
 @register(outgoing=True, pattern="^.crblang (.*)")
@@ -669,12 +669,12 @@ CMD_HELP.update(
 CMD_HELP.update({
     'tts':
     '.tts <text> [or reply]\
-        \nUsage: Translates text to speech for the language which is set.\nUse .lang tts <language code> to set language for tts. (Default language is Indonesian)'
+        \nUsage: Translates text to speech for the language which is set.\nUse .lang tts <language code> to set language for tts. (Default language is English)'
 })
 CMD_HELP.update({
     'trt':
     '.trt <text> [or reply]\
-        \nUsage: Translates text to the language which is set.\nUse .lang trt <language code> to set language for trt. (Default language is Indonesian)'
+        \nUsage: Translates text to the language which is set.\nUse .lang trt <language code> to set language for trt. (Default language is English)'
 })
 CMD_HELP.update({'yt': '.yt <text>\
         \nUsage: Does a YouTube search.'})
