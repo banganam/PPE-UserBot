@@ -5,7 +5,7 @@
 <p align="center">&nbsp;</p>
 <h2 align="center">Deploy UserBot</h2>
 <h5 align="center">The easiest way to deploy this UserBot!</h5>
-<p align="center"><a href="https://heroku.com/deploy?template=https://github.com/IndraDesiP/Telegram-UserBot/tree/sql-extended"> <img src="https://www.herokucdn.com/deploy/button.svg" alt="Deploy to Heroku" /></a></p>
+<p align="center"><a href="https://heroku.com/deploy?template=https://github.com/IndraDesiP/PPE-UserBot/tree/sql-extended"> <img src="https://www.herokucdn.com/deploy/button.svg" alt="Deploy to Heroku" /></a></p>
 <p align="center">&nbsp;</p>
 <h2 align="center">Credits</h2>
 <p align="center">Huge thanks to <a href="https://github.com/AvinashReddy3108/PaperplaneExtended/">AvinashReddy3108</a> and <a href="https://github.com/AvinashReddy3108/PaperplaneExtended/graphs/contributors">all contributors</a> for helped make this userbot awesome!!</p>
