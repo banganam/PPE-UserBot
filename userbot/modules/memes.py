@@ -8,13 +8,10 @@ from asyncio import sleep
 from random import choice, getrandbits, randint
 from re import sub
 import time
-
 from collections import deque
-
+from zalgo_text import zalgo
 import requests
-
 from cowpy import cow
-
 from userbot import CMD_HELP
 from userbot.events import register
 from userbot.modules.admin import get_user_from_event
@@ -27,120 +24,6 @@ METOOSTR = [
     "Same here",
     "Haha yes",
 ]
-
-ZALG_LIST = [[
-    "̖",
-    " ̗",
-    " ̘",
-    " ̙",
-    " ̜",
-    " ̝",
-    " ̞",
-    " ̟",
-    " ̠",
-    " ̤",
-    " ̥",
-    " ̦",
-    " ̩",
-    " ̪",
-    " ̫",
-    " ̬",
-    " ̭",
-    " ̮",
-    " ̯",
-    " ̰",
-    " ̱",
-    " ̲",
-    " ̳",
-    " ̹",
-    " ̺",
-    " ̻",
-    " ̼",
-    " ͅ",
-    " ͇",
-    " ͈",
-    " ͉",
-    " ͍",
-    " ͎",
-    " ͓",
-    " ͔",
-    " ͕",
-    " ͖",
-    " ͙",
-    " ͚",
-    " ",
-],
-             [
-                 " ̍",
-                 " ̎",
-                 " ̄",
-                 " ̅",
-                 " ̿",
-                 " ̑",
-                 " ̆",
-                 " ̐",
-                 " ͒",
-                 " ͗",
-                 " ͑",
-                 " ̇",
-                 " ̈",
-                 " ̊",
-                 " ͂",
-                 " ̓",
-                 " ̈́",
-                 " ͊",
-                 " ͋",
-                 " ͌",
-                 " ̃",
-                 " ̂",
-                 " ̌",
-                 " ͐",
-                 " ́",
-                 " ̋",
-                 " ̏",
-                 " ̽",
-                 " ̉",
-                 " ͣ",
-                 " ͤ",
-                 " ͥ",
-                 " ͦ",
-                 " ͧ",
-                 " ͨ",
-                 " ͩ",
-                 " ͪ",
-                 " ͫ",
-                 " ͬ",
-                 " ͭ",
-                 " ͮ",
-                 " ͯ",
-                 " ̾",
-                 " ͛",
-                 " ͆",
-                 " ̚",
-             ],
-             [
-                 " ̕",
-                 " ̛",
-                 " ̀",
-                 " ́",
-                 " ͘",
-                 " ̡",
-                 " ̢",
-                 " ̧",
-                 " ̨",
-                 " ̴",
-                 " ̵",
-                 " ̶",
-                 " ͜",
-                 " ͝",
-                 " ͞",
-                 " ͟",
-                 " ͠",
-                 " ͢",
-                 " ̸",
-                 " ̷",
-                 " ͡",
-             ]]
 
 
 EMOJIS = [
@@ -683,40 +566,22 @@ async def stretch(stret):
 @register(outgoing=True, pattern="^.zal(?: |$)(.*)")
 async def zal(zgfy):
     """ Invoke the feeling of chaos. """
-    reply_text = list()
-    textx = await zgfy.get_reply_message()
-    message = zgfy.pattern_match.group(1)
-    if message:
-        pass
-    elif textx:
-        message = textx.text
-    else:
-        await zgfy.edit(
-            "`gͫ ̆ i̛ ̺ v͇̆ ȅͅ   a̢ͦ   s̴̪ c̸̢ ä̸ rͩͣ y͖͞   t̨͚ é̠ x̢͖  t͔͛`"
-        )
-        return
+    if not zgfy.text[0].isalpha() and zgfy.text[0] not in ("/", "#", "@", "!"):
+        textx = await zgfy.get_reply_message()
+        message = zgfy.pattern_match.group(1)
+        if message:
+            pass
+        elif textx:
+            message = textx.text
+        else:
+            await zgfy.edit(
+                "`gͫ ̆ i̛ ̺ v͇̆ ȅͅ   a̢ͦ   s̴̪ c̸̢ ä̸ rͩͣ y͖͞   t̨͚ é̠ x̢͖  t͔͛`"
+            )
+            return
 
-    for charac in message:
-        if not charac.isalpha():
-            reply_text.append(charac)
-            continue
-
-        for _ in range(0, 3):
-            randint = randint(0, 2)
-
-            if randint == 0:
-                charac = charac.strip() + \
-                    choice(ZALG_LIST[0]).strip()
-            elif randint == 1:
-                charac = charac.strip() + \
-                    choice(ZALG_LIST[1]).strip()
-            else:
-                charac = charac.strip() + \
-                    choice(ZALG_LIST[2]).strip()
-
-        reply_text.append(charac)
-
-    await zgfy.edit("".join(reply_text))
+        input_text = " ".join(message).lower()
+        zalgofied_text = zalgo.zalgo().zalgofy(input_text)
+        await zgfy.edit(zalgofied_text)
 
 
 @register(outgoing=True, pattern="^.hi$")
