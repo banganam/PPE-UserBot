@@ -37,11 +37,11 @@ async def kang(args):
 
     if message and message.media:
         if isinstance(message.media, MessageMediaPhoto):
-            await args.edit(f"`Hello! This sticker has been saved. Check Indra DP's sticker pack` [here](t.me/addstickers/a745307806_by_IndraDP_1). 😉👍")
+            await args.edit(f"`Hello! This sticker has been saved. 😉👍")
             photo = io.BytesIO()
             photo = await bot.download_media(message.photo, photo)
         elif "image" in message.media.document.mime_type.split('/'):
-            await args.edit(f"`Hello! This sticker has been saved. Check Indra DP's sticker pack` [here](t.me/addstickers/a745307806_by_IndraDP_1). 😉👍")
+            await args.edit(f"`Hello! This sticker has been saved. 😉👍")
             photo = io.BytesIO()
             await bot.download_file(message.media.document, photo)
             if (DocumentAttributeFilename(file_name='sticker.webp') in
@@ -229,7 +229,7 @@ async def kang(args):
                 await bot.send_read_acknowledge(conv.chat_id)
 
             await args.edit(
-                f"`Hello! This sticker has been saved. Check Indra DP's sticker pack` [here](t.me/addstickers/{packname}). 😉👍",
+                f"`Hello! This sticker has been saved. Check my sticker pack` [here](t.me/addstickers/{packname}). 😉👍",
                 parse_mode='md'
             )
 
