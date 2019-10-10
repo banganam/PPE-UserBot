@@ -101,7 +101,7 @@ async def set_afk(afk_e):
         AFKREASON = string
         await afk_e.edit(f"`You are offline, because {string}`")
     else:
-        await afk_e.edit("Sedang offine!")
+        await afk_e.edit("You are offline now!")
     if BOTLOG:
         await afk_e.client.send_message(BOTLOG_CHATID, "#AFK\nYou are offline now!")
     ISAFK = True
