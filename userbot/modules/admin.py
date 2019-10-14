@@ -524,27 +524,24 @@ async def gspider(gspdr):
                 f"CHAT: {gspdr.chat.title}(`{gspdr.chat_id}`)")
 
 
-@register(outgoing=True, pattern="^.delusers(?: |$)(.*)", groups_only=True)
+@register(outgoing=True, pattern="^.delac(?: |$)(.*)", groups_only=True)
 async def rm_deletedacc(show):
-    """ For .delusers command, list all the ghost/deleted accounts in a chat. """
-    if not show.is_group:
-        await show.edit("`I don't think this is a group.`")
-        return
+    """ For .delac command, list all the deleted accounts in a chat. """
+
     con = show.pattern_match.group(1).lower()
     del_u = 0
     del_status = "`No deleted accounts found, Group is cleaned as Hell`"
 
     if con != "clean":
-        await show.edit("`Searching for zombie accounts...`")
-        async for user in show.client.iter_participants(show.chat_id,
-                                                        aggressive=True):
+        await show.edit("`Searching for deleted accounts...`")
+        async for user in show.client.iter_participants(show.chat_id):
+
             if user.deleted:
                 del_u += 1
                 await sleep(1)
         if del_u > 0:
-            del_status = f"Found **{del_u}** deleted account(s) in this group,\
-            \nclean them by using .delusers clean"
-
+            del_status = f"`Found` **{del_u}** `deleted account(s) in this group,\
+            \nclean them by using .delac clean`"
         await show.edit(del_status)
         return
 
@@ -577,6 +574,7 @@ async def rm_deletedacc(show):
                 EditBannedRequest(show.chat_id, user.id, UNBAN_RIGHTS))
             del_u += 1
 
+
     if del_u > 0:
         del_status = f"Cleaned **{del_u}** deleted account(s)"
 
@@ -584,9 +582,11 @@ async def rm_deletedacc(show):
         del_status = f"Cleaned **{del_u}** deleted account(s) \
         \n**{del_a}** deleted admin accounts are not removed"
 
+
     await show.edit(del_status)
     await sleep(2)
     await show.delete()
+
 
     if BOTLOG:
         await show.client.send_message(
@@ -827,7 +827,9 @@ CMD_HELP.update({
 \nUsage: Mutes the person in all groups you have in common with them.\
 \n\n.ungmute <username/userid> (or) reply to a message with .ungmute\
 \nUsage: Removes the person from the global mute list.\
-\n\n.delusers clean\
+\n\n.delac\
+\nUsage: Searches for deleted accounts in a group. Use .delac clean to remove all deleted accounts from the group.\
+\n\n.delac clean\
 \nUsage: Clean all deleted accounts from the group.\
 \n\n.admins\
 \nUsage: Retrieves a list of admins in the chat.\
