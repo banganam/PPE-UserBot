@@ -10,7 +10,7 @@ from userbot import BOTLOG, BOTLOG_CHATID, CMD_HELP
 from userbot.events import register
 
 
-@register(outgoing=True, pattern="^.cspam (.*)")
+@register(outgoing=True, pattern="^.lspam (.*)")
 async def tmeme(e):
     cspam = str(e.pattern_match.group(1))
     message = cspam.replace(" ", "")
@@ -20,7 +20,7 @@ async def tmeme(e):
     if BOTLOG:
         await e.client.send_message(
             BOTLOG_CHATID, "#CSPAM\n"
-            "TSpam was executed successfully")
+            "LSpam was executed successfully")
 
 
 @register(outgoing=True, pattern="^.wspam (.*)")
@@ -79,7 +79,7 @@ async def spammer(e):
 
 CMD_HELP.update({
     "spam":
-    ".cspam <text>\
+    ".lspam <text>\
 \nUsage: Spam the text letter by letter.\
 \n\n.spam <count> <text>\
 \nUsage: Floods text in the chat !!\
