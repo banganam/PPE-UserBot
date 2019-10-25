@@ -245,7 +245,7 @@ async def wiki(wiki_q):
             BOTLOG_CHATID, f"Wiki query `{match}` was executed successfully")
 
         
-        @register(outgoing=True, pattern="^.ud (.*)")
+@register(outgoing=True, pattern="^.ud (.*)")
 async def urban_dict(ud_e):
     """ For .ud command, fetch content from Urban Dictionary. """
     await ud_e.edit("Processing...")
