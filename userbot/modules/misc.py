@@ -82,6 +82,7 @@ async def reedme(e):
         "\nPaperplane Extended's GitHub page - [Click here](https://github.com/AvinashReddy3108/PaperplaneExtended)."
         "\nSetup Guide - [How to host UserBot](https://telegra.ph/How-to-host-a-Telegram-Userbot-07-24)"
         "\nSetup Guide - [How to setup Google Drive](https://telegra.ph/How-To-Setup-GDrive-07-27)"
+        "\nSetup Guide - [How to setup LastFM Module](https://telegra.ph/How-to-set-up-LastFM-module-for-Paperplane-userbot-08-10)"
         "\n\nAnd visit my blog Indra's Blog at [this link](https://www.indradp.com) 😉👍"
     )
 
