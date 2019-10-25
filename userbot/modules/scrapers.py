@@ -21,6 +21,7 @@ from selenium.webdriver.support.ui import Select
 from selenium.webdriver.chrome.options import Options
 from wikipedia import summary
 from wikipedia.exceptions import DisambiguationError, PageError
+from urbandict import define
 from requests import get
 from search_engine_parser import GoogleSearch
 from google_images_download import google_images_download
@@ -242,6 +243,46 @@ async def wiki(wiki_q):
     if BOTLOG:
         await wiki_q.client.send_message(
             BOTLOG_CHATID, f"Wiki query `{match}` was executed successfully")
+
+        
+        @register(outgoing=True, pattern="^.ud (.*)")
+async def urban_dict(ud_e):
+    """ For .ud command, fetch content from Urban Dictionary. """
+    await ud_e.edit("Processing...")
+    query = ud_e.pattern_match.group(1)
+    try:
+        define(query)
+    except HTTPError:
+        await ud_e.edit(f"Sorry, couldn't find any results for: {query}")
+        return
+    mean = define(query)
+    deflen = sum(len(i) for i in mean[0]["def"])
+    exalen = sum(len(i) for i in mean[0]["example"])
+    meanlen = deflen + exalen
+    if int(meanlen) >= 0:
+        if int(meanlen) >= 4096:
+            await ud_e.edit("`Output too large, sending as file.`")
+            file = open("output.txt", "w+")
+            file.write("Text: " + query + "\n\nMeaning: " + mean[0]["def"] +
+                       "\n\n" + "Example: \n" + mean[0]["example"])
+            file.close()
+            await ud_e.client.send_file(
+                ud_e.chat_id,
+                "output.txt",
+                caption="`Output was too large, sent it as a file.`")
+            if os.path.exists("output.txt"):
+                os.remove("output.txt")
+            await ud_e.delete()
+            return
+        await ud_e.edit("Text: **" + query + "**\n\nMeaning: **" +
+                        mean[0]["def"] + "**\n\n" + "Example: \n__" +
+                        mean[0]["example"] + "__")
+        if BOTLOG:
+            await ud_e.client.send_message(
+                BOTLOG_CHATID,
+                "ud query `" + query + "` executed successfully.")
+    else:
+        await ud_e.edit("No result found for **" + query + "**")
 
 
 @register(outgoing=True, pattern=r"^.tts(?: |$)([\s\S]*)")
@@ -666,6 +707,9 @@ CMD_HELP.update(
 CMD_HELP.update(
     {'wiki': '.wiki <query>\
         \nUsage: Does a search on Wikipedia.'})
+CMD_HELP.update(
+    {'ud': '.ud <query>\
+        \nUsage: Does a search on Urban Dictionary.'})
 CMD_HELP.update({
     'tts':
     '.tts <text> [or reply]\
