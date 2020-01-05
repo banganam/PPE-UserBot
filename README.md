@@ -3,8 +3,6 @@
 <h4 align="center">Based on <a href="https://github.com/MyPaperPlane/Telegram-UserBot">RaphielGang's Paperplane</a> Telegram UserBot.</h4>
 <p align="center"><a href="#credits">Credits</a> | <a href="#license">License</a></p>
 <p align="center">&nbsp;</p>
-<h2 align="center">Deploy UserBot</h2>
-<h5 align="center">The easiest way to deploy this UserBot!</h5>
 <p align="center">&nbsp;</p>
 <h2 align="center">Credits</h2>
 <p align="center">Huge thanks to <a href="https://github.com/AvinashReddy3108/PaperplaneExtended/">AvinashReddy3108</a> and <a href="https://github.com/AvinashReddy3108/PaperplaneExtended/graphs/contributors">all contributors</a> for helped make this userbot awesome!!</p>
